@@ -6,13 +6,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(73);
-        list.add(67);
-        list.add(38);
-        list.add(33);
-        System.out.println(list);
-        var grades = GradingStudents.gradingStudents(list);
-        System.out.println(grades);
+        int[] arr = {3, 1, -1, -5, 10, 4, 7, 8, -100, 6, 2, 9, 5};
+
+        int[] left = {2, 5};
+        int[] right = {1, 3, 4};
+
+//        int[] sorted = MergeSort.mergeSort(arr);
+//
+//        for (int i = 0; i < sorted.length; i++) {
+//            System.out.print(sorted[i]);
+//        }
+//        MergeSort.merge(left, right);
+            MergeSort.mergeSort(arr);
     }
 }
