@@ -9,6 +9,6 @@ public class Main {
 //
 //       RansomNote.checkMagazine(new String[]{"one", "two"}, new String[]{"one", "two"});
 //       RansomNote.checkMagazine(new String[]{"one", "two"}, new String[]{"one", "zero"});
-       RansomNote.checkMagazine(new String[]{"two", "times", "three", "is", "not", "four"}, new String[]{"two", "times", "two", "is", "four"});
+       RansomNote2.checkMagazine(new String[]{"two", "times", "two", "is", "four"}, new String[]{"two", "times", "two", "is", "four"});
     }
 }

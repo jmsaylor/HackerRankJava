@@ -7,37 +7,34 @@ public class RansomNote {
 
     // Complete the checkMagazine function below.
     static void checkMagazine(String[] magazine, String[] note) {
+
+        Map<String, Integer> magazineMap = frequencyLogger(magazine);
+        Map<String, Integer> noteMap = frequencyLogger(note);
+
+        System.out.println( hasExactWords(magazineMap, noteMap) ? "Yes" : "No");
+    }
+
+    private static Map<String, Integer> frequencyLogger(String[] content) {
+        Map<String, Integer> frequencyMap = new HashMap<>();
+        for (String word : content) {
+            if (frequencyMap.putIfAbsent(word, 1) != null){
+                int temp = frequencyMap.get(word);
+                temp++;
+                frequencyMap.put(word, temp);
+            }
+        }
+        return frequencyMap;
+    }
+
+    private static boolean hasExactWords(Map<String, Integer> source, Map<String, Integer> target) {
         boolean result = true;
-        Map<String, Integer> magazineMap = new HashMap();
-        Map<String, Integer> noteMap = new HashMap();
-
-        for (String word : magazine) {
-            if (magazineMap.putIfAbsent(word, 1) != null){
-                int temp = magazineMap.get(word);
-                temp++;
-                magazineMap.put(word, temp);
-            }
-        }
-
-        for (String word : note) {
-            if (noteMap.putIfAbsent(word, 1) != null){
-                int temp = noteMap.get(word);
-                temp++;
-                noteMap.put(word, temp);
-            }
-        }
-
-        for (String word : noteMap.keySet()) {
+        for (String word : target.keySet()) {
 //            System.out.println(magazineMap.get(word) + " : " + noteMap.get(word));
-            if (magazineMap.get(word) == null || noteMap.get(word) > magazineMap.get(word)){
+            if (source.get(word) == null || target.get(word) > source.get(word)){
                 result = false;
             }
         }
-
-        System.out.println( result ? "Yes" : "No");
-
-//        System.out.println(magazineMap);
-//        System.out.println(noteMap);
+        return result;
     }
 
 }
