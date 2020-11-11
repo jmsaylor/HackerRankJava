@@ -6,6 +6,6 @@ public class Main {
     public static void main(String[] args) {
 //
 //
-        JavaStack.test();
+        JavaLoopsII.test(0,2,10);
     }
 }
