@@ -1,12 +1,11 @@
 package com.johnmsaylor;
 
 
+
 public class Main {
 
     public static void main(String[] args) {
-//
-//
-
-        SubStrings.test("marbar", 3);
+        Palindrome.test("mam");
+        Palindrome.test("racecar");
     }
 }
