@@ -7,8 +7,16 @@ public class StaticBlocks {
     private static int B;
 
     static {
-        Scanner scanner = new Scanner(System.in);
-        B = 5 * scanner.nextInt();
+        try{
+            Scanner scanner = new Scanner(System.in);
+            int multiplier = scanner.nextInt();
+            if (multiplier > 100) {
+                throw new Exception("System Overloaded");
+            }
+            B = 5 * multiplier;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public static int getB() {
