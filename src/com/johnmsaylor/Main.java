@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) {
 //
 //
-        JavaDataTypes.test();
+
+        System.out.println(StaticBlocks.getB());
+        System.out.println(StaticBlocks.getB());
     }
 }
