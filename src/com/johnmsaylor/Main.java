@@ -7,6 +7,6 @@ public class Main {
 //
 //
 
-        System.out.println(JavaCalendar.getDayOfWeek(3,18,1987));
+        SubStrings.test("marbar", 3);
     }
 }
