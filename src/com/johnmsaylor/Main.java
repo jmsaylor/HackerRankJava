@@ -7,7 +7,6 @@ public class Main {
 //
 //
 
-        System.out.println(StaticBlocks.getB());
-        System.out.println(StaticBlocks.getB());
+        System.out.println(JavaCalendar.getDayOfWeek(3,18,1987));
     }
 }
