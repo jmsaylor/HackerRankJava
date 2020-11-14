@@ -9,6 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        CurrencyFormat.test(10.01);
+       StringManipulation.test("Al", "lambda");
     }
 }
