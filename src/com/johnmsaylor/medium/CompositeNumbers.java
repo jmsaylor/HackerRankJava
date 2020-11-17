@@ -6,16 +6,25 @@ import java.util.Arrays;
 
 public class CompositeNumbers {
 
-    public static long[] bonetrousle(long neededSticks, long maxStickCount, int boxRequirement ) {
-
-
+    public static void test() {
+//        22 7 6
+        bonetrousle(22,7,6);
+//        26 7 6
+        bonetrousle(26,7,6);
+//        25 10 5
+        bonetrousle(25,10,5);
+//        39 15 3
+        bonetrousle(39, 15, 3);
+//        95 20 10
+        bonetrousle(95,20,10);
     }
 
-    public static long[] attempt1(long neededSticks, long maxStickCount, int boxRequirement ) {
+    public static long[] bonetrousle(long neededSticks, long maxStickCount, int boxRequirement ) {
         final int AVERAGE = (int) (neededSticks / boxRequirement);
+        final int DISTANCE = boxRequirement / 2;
+
         final boolean NEEDED_STICKS_EVEN = (neededSticks % 2 == 0);
         final boolean BOX_REQUIREMENT_EVEN = (boxRequirement % 2 == 0);
-        final int DISTANCE = boxRequirement / 2;
 
         if (AVERAGE - DISTANCE < 1 || AVERAGE + DISTANCE > maxStickCount) {
             return new long[]{-1}; //FAILS
@@ -26,7 +35,6 @@ public class CompositeNumbers {
         logBools(NEEDED_STICKS_EVEN, BOX_REQUIREMENT_EVEN);
         if (BOX_REQUIREMENT_EVEN) {
             if (NEEDED_STICKS_EVEN) {
-//
                 for (long i = AVERAGE - DISTANCE; i <= AVERAGE + DISTANCE; i++) {
                     if (i == AVERAGE + DISTANCE) {
                         i += neededSticks % boxRequirement;
@@ -34,7 +42,6 @@ public class CompositeNumbers {
                     if (i != AVERAGE) {
                         resultArray[resultIndex++] = i;
                     }
-                    System.out.println(Arrays.toString(resultArray));
                 }
             } else {
                 //ODD
@@ -45,7 +52,6 @@ public class CompositeNumbers {
                     if (i != AVERAGE) {
                         resultArray[resultIndex++] = i;
                     }
-                    System.out.println(Arrays.toString(resultArray));
                 }
 
             }
@@ -57,23 +63,19 @@ public class CompositeNumbers {
                     if (i == AVERAGE + DISTANCE) {
                         i += neededSticks % boxRequirement;
                     }
-
                     resultArray[resultIndex++] = i;
-                    System.out.println(Arrays.toString(resultArray));
                 }
             } else {
                 for (long i = AVERAGE - DISTANCE; i <= AVERAGE + DISTANCE; i++) {
                     if (i == AVERAGE + DISTANCE) {
                         i += neededSticks % boxRequirement;
                     }
-
                     resultArray[resultIndex++] = i;
-
-                    System.out.println(Arrays.toString(resultArray));
                 }
             }
         }
 
+        System.out.println(Arrays.toString(resultArray));
         return resultArray;
     }
 
