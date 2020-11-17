@@ -1,13 +1,17 @@
 package com.johnmsaylor;
-import com.johnmsaylor.medium.Candies;
+import com.johnmsaylor.medium.CompositeNumbers;
+
+import java.util.Arrays;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Candies.test(10, new int[]{2,4,2,6,1,7,8,9,2,1});
+        long[] result = CompositeNumbers.bonetrousle(12,6, 3);
 
+        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.stream(result).sum());
     }
 
 }

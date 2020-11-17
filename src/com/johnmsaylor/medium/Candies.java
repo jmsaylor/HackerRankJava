@@ -23,7 +23,10 @@ public class Candies {
             resultArray[i] = (right[i] > left[i]) ? right[i] : left[i];
         }
 
-        return Arrays.stream(resultArray).sum();
+        int totalCandies = Arrays.stream(resultArray).sum();
+        System.out.println(totalCandies);
+
+        return totalCandies;
 
     }
 
