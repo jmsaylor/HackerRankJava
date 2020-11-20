@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        BigIntFactorials.extraLongFactorials(5);
+        System.out.println(TimeInWords.timeInWords(7,29));
     }
 
 }
