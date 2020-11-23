@@ -46,14 +46,63 @@ public class BinaryTree {
         }
     }
 
+    public int lowestCommonAncestor(int value1, int value2) {
+        Node result = lca2(getRoot(), value1, value2);
+        return result.data;
+    }
+
+    public Node lca2(Node root, int value1, int value2){
+        while (root != null) {
+            if (root.data < value1 && root.data < value2) {
+                root = root.right;
+            } else if (root.data > value1 && root.data > value2) {
+                root = root.left;
+            } else {
+                break;
+            }
+        }
+        return root;
+    }
+
     public Node lca(Node root, int value1, int value2) {
+
         if (root.data < value1 && root.data < value2) {
-            lca(root.right, value1, value2);
+            return lca(root.right, value1, value2);
         } else if (root.data > value1 && root.data > value2) {
-            lca(root.left, value1, value2);
+            return lca(root.left, value1, value2);
+        } else {
+            return root;
+        }
+    }
+
+    public void printTree() {
+        printTree(getRoot());
+    }
+
+
+    public void printNode(Node root, int find) {
+        if (root.data == find) {
+            int dataLeft = root.left != null ? root.left.data : 0;
+            int dataRight = root.right != null ? root.right.data : 0;
+            System.out.println(root.data + " " + dataLeft + " " + dataRight);
+        }
+        if (root.left != null) {
+            printNode(root.left, find);
+        }
+        if (root.right != null) {
+            printNode(root.right, find);
         }
 
-        return root;
+    }
+
+    public void printTree(Node root) {
+        System.out.print(root.data);
+        if (root.left != null) {
+            printTree(root.left);
+        }
+        if (root.right != null) {
+            printTree(root.right);
+        }
     }
 
     public Node getRoot() {
