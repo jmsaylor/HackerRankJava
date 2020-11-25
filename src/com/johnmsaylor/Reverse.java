@@ -7,7 +7,7 @@ public class Reverse {
 
     public static void test(int[] arr) {
         final int LENGTH = arr.length - 1;
-        final int HALF = LENGTH / 2;
+        final int HALF = arr.length / 2;
         int temp;
 
         System.out.println(Arrays.toString(arr));
