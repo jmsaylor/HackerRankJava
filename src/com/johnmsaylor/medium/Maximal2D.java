@@ -37,6 +37,6 @@ public class Maximal2D {
             }
 
         }
-
+        return 0;
     }
 }
