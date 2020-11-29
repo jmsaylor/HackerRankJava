@@ -7,8 +7,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        BinaryNumbers.byHand(2);
-        BinaryNumbers.builtIn(2);
+        HourGlasses.test();
 
     }
 
