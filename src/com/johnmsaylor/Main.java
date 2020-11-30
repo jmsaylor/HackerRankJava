@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        HourGlasses.test();
+        ScoreAverage.get(new int[]{80,60,90});
 
     }
 
