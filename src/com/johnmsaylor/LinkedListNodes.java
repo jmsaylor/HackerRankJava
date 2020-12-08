@@ -2,9 +2,9 @@ package com.johnmsaylor;
 
 public class LinkedListNodes {
 
-    public static Node newHead(int data) {
-        return new Node(data);
-    }
+//    public static Node newHead(int data) {
+//        return new Node(data);
+//    }
 
     class Node {
         Node next;
