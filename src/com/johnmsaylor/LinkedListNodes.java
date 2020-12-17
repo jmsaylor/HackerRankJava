@@ -1,5 +1,8 @@
 package com.johnmsaylor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedListNodes {
 
 //    public static Node newHead(int data) {
@@ -28,5 +31,25 @@ public class LinkedListNodes {
             }
             return head;
         }
+    }
+
+    public static Node removeDuplicates(Node head) {
+        //Write your code here
+        Node firstNode = head;
+        Set<Integer> exists = new HashSet<>();
+        Node previous = null;
+
+        while (head != null) {
+            if (exists.contains(head.data)) {
+                previous.next = head.next;
+                System.out.print(head.data + " ");
+            } else {
+                exists.add(head.data);
+                previous = head;
+            }
+            head = head.next;
+        }
+
+        return firstNode;
     }
 }

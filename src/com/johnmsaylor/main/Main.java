@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        NonDivisibleSubset.test(3);
+        BomberMan.test();
 
     }
 
