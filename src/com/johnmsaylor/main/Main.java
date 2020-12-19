@@ -12,8 +12,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(Memoization.fib(50L, new HashMap<>()));
-
+        System.out.println(Memoization.canSum(100, new int[]{25, 50}));
     }
 
 }

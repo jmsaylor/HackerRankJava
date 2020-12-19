@@ -11,5 +11,18 @@ public class Memoization {
         return memo.get(n);
     }
 
+    public static boolean canSum(int target, int[] members) {
+        if (target == 0) return true;
+        if (target < 0) return false;
+
+        for (int member : members) {
+            if (canSum(target - member, members)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }
