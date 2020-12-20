@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        System.out.println(QueensAttackII.queensAttack(4,0,4,4, new int[][]{}));
+        System.out.println(QueensAttackII.queensAttackTest(4,0,4,4, new int[][]{{4,3}}));
     }
 
 }
