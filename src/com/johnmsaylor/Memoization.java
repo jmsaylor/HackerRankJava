@@ -24,5 +24,14 @@ public class Memoization {
         return false;
     }
 
+    public static Long gridTraveller(int n, int m, HashMap<String, Long> memo) {
+        String key = n + "," + m;
 
+        if (memo.containsKey(key)) return memo.get(key);
+        if (n == 1 && m == 1) return 1L;
+        if (n == 0 || m == 0) return 0L;
+
+        memo.put(key, gridTraveller(n - 1, m, memo) + gridTraveller(n, m - 1, memo));
+        return memo.get(key);
+    }
 }
