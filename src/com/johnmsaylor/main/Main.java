@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        System.out.println(Memoization.gridTraveller(18,18, new HashMap<>()));
+        System.out.println(Memoization.canSum(300, new int[]{7, 14}, new HashMap<>()));
     }
 
 }

@@ -11,16 +11,19 @@ public class Memoization {
         return memo.get(n);
     }
 
-    public static boolean canSum(int target, int[] members) {
+    public static boolean canSum(int target, int[] numbers, HashMap<Integer, Boolean> memo) {
+        if (memo.containsKey(target)) return memo.get(target);
         if (target == 0) return true;
         if (target < 0) return false;
 
-        for (int member : members) {
-            if (canSum(target - member, members)) {
+        for (int number : numbers) {
+            int remainder = target - number;
+            if (canSum(remainder, numbers, memo)) {
+                memo.put(target, true);
                 return true;
             }
         }
-
+        memo.put(target, false);
         return false;
     }
 
