@@ -1,8 +1,10 @@
 package com.johnmsaylor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Memoization {
 
@@ -48,6 +50,28 @@ public class Memoization {
 
         memo.put(targetSum, null);
         return null;
+    }
+
+    public static List<Integer> bestSum(int target, int[] numbers, HashMap<Integer, List<Integer>> memo) {
+        if (memo.containsKey(target)) return memo.get(target);
+        if (target == 0) return new ArrayList<>();
+        if (target < 0) return null;
+
+        List<Integer> shortestCombination = null;
+
+        for (int num : numbers){
+            int remainder = target - num;
+            List<Integer> remainderCombination = bestSum(remainder, numbers, memo);
+            if (remainderCombination != null) {
+                List<Integer> combination = new ArrayList<>(remainderCombination);
+                combination.add(num);
+                if (shortestCombination == null || combination.size() < shortestCombination.size()) {
+                    shortestCombination = combination;
+                }
+            }
+        }
+        memo.put(target, shortestCombination);
+        return shortestCombination;
     }
 
     public static Long gridTraveller(int n, int m, HashMap<String, Long> memo) {

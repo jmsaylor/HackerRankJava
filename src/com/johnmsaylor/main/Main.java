@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(Memoization.howSum(10, new int[]{ 3, 4}, new HashMap<>()));
+        System.out.println(Memoization.bestSum(1000, new int[]{ 2, 3, 25, 150}, new HashMap<>()));
 
     }
 
