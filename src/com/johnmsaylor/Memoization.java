@@ -1,6 +1,8 @@
 package com.johnmsaylor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Memoization {
 
@@ -25,6 +27,27 @@ public class Memoization {
         }
         memo.put(target, false);
         return false;
+    }
+
+    public static List<Integer> howSum(int targetSum, int[] numbers, HashMap<Integer, List> memo) {
+        if (memo.containsKey(targetSum)) return memo.get(targetSum);
+        if (targetSum == 0) return new ArrayList<>();
+        if (targetSum < 0) return null;
+
+        for (int num : numbers) {
+            int remainder = targetSum - num;
+            List<Integer> remainderResult = howSum(remainder, numbers, memo);
+            System.out.println(remainderResult);
+            if (remainderResult != null) {
+                remainderResult.add(num);
+                memo.put(targetSum, remainderResult);
+                System.out.println(memo);
+                return memo.get(targetSum);
+            }
+        }
+
+        memo.put(targetSum, null);
+        return null;
     }
 
     public static Long gridTraveller(int n, int m, HashMap<String, Long> memo) {
