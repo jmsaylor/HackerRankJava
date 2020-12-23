@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        GmailRegex.find("john@gmail.com");
+        System.out.println(QueensAttackII.queensAttack(4, 0, 4, 4, new int[][]{}));
 
     }
 
