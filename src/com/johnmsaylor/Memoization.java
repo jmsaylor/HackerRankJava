@@ -1,9 +1,6 @@
 package com.johnmsaylor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Memoization {
@@ -84,4 +81,63 @@ public class Memoization {
         memo.put(key, gridTraveller(n - 1, m, memo) + gridTraveller(n, m - 1, memo));
         return memo.get(key);
     }
+
+    public static boolean canConstruct(String target, String[] wordbank, Map<String, Boolean> memo){
+        if (memo.containsKey(target)) return memo.get(target);
+        if (target.length() == 0) return true;
+
+        for (String word : wordbank) {
+            if (target.startsWith(word)){
+                String newTarget = target.substring(word.length());
+                if (canConstruct(newTarget, wordbank, memo)) {
+                    memo.put(target, true);
+                    return true;
+                }
+            }
+        }
+
+        memo.put(target, false);
+        return false;
+     }
+
+     public static int countConstruct(String target, String[] wordbank, Map<String, Integer> memo){
+        if (memo.containsKey(target))return memo.get(target);
+        if (target.length() == 0) return 1;
+
+        int totalCount = 0;
+
+        for (String word : wordbank){
+            if (target.indexOf(word) == 0) {
+                int numWaysForRest = countConstruct(target.substring(word.length()), wordbank, memo);
+                totalCount += numWaysForRest;
+            }
+        }
+
+        memo.put(target, totalCount);
+        return totalCount;
+     }
+
+     public static List<List<String>> allConstruct(String target, String[] wordbank){
+        if (target.isBlank()) return new ArrayList();
+
+        List<List<String>> result = new ArrayList<>();
+
+        for (String word : wordbank){
+            if (target.startsWith(word)){
+                List<List<String>> suffixWays = allConstruct(target.substring(word.length()), wordbank);
+                List<List<String>> targetWays = new ArrayList(suffixWays);
+                if (suffixWays.isEmpty()) {
+                    List<String> newList = new ArrayList<>();
+                    newList.add(word);
+                    targetWays.add(newList);
+                } else {
+                    for (List<String> way : targetWays) {
+                        way.add(word);
+                    }
+                }
+                result.addAll(targetWays);
+            }
+        }
+        return result;
+     }
 }
