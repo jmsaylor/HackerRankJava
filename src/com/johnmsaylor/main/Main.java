@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(Tabulation.fib(50));
+        Tabulation.gridTraveller(6,8);
     }
 
 }

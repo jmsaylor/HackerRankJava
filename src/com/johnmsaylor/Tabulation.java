@@ -18,4 +18,22 @@ public class Tabulation {
 
         return  table[(int)n];
     }
+
+    public static int gridTraveller(int m, int n){
+        int[][] grid = new int[m + 1][n + 1];
+        Arrays.stream(grid).forEach(x -> Arrays.fill(x, 0));
+        grid[1][1] = 1;
+
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                int current = grid[i][j];
+                if (j + 1 <= n) grid[i][j + 1] += current;
+                if (i + 1 <= m) grid[i + 1][j] += current;
+            }
+        }
+
+        Arrays.stream(grid).forEach(x -> System.out.println(Arrays.toString(x)));
+
+        return grid[m][n];
+    }
 }
