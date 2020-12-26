@@ -140,4 +140,26 @@ public class Memoization {
         }
         return result;
      }
+
+    public static List<List<String>> allConstruct2(String target, String[] wordbank){
+        if (target.isBlank()) {
+            List<List<String>> base = new ArrayList();
+            base.add(new ArrayList<>());
+            return base;
+        }
+
+        List<List<String>> result = new ArrayList<>();
+
+        for (String word : wordbank){
+            if (target.startsWith(word)){
+                List<List<String>> suffixWays = allConstruct(target.substring(word.length()), wordbank);
+                List<List<String>> targetWays = new ArrayList(suffixWays);
+                for (List<String> way : targetWays) {
+                    way.add(word);
+                }
+                result.addAll(targetWays);
+            }
+        }
+        return result;
+    }
 }
