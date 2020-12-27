@@ -36,4 +36,23 @@ public class Tabulation {
 
         return grid[m][n];
     }
+
+    public static boolean canSum(int target, int[] numbers) {
+        boolean[] table = new boolean[target + 1];
+        Arrays.fill(table, false);
+        table[0] = true;
+        for (int i = 0; i < target; i++) {
+            if (table[i]) {
+                for (int num : numbers) {
+                    if (i + num <= target) {
+                        table[i + num] = true;
+                    }
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(table));
+
+        return table[target];
+    }
 }

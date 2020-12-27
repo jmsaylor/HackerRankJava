@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        Tabulation.gridTraveller(6,8);
+        Tabulation.canSum(8, new int[]{3, 5});
     }
 
 }
