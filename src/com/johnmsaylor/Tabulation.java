@@ -1,6 +1,6 @@
 package com.johnmsaylor;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Tabulation {
 
@@ -54,5 +54,73 @@ public class Tabulation {
         System.out.println(Arrays.toString(table));
 
         return table[target];
+    }
+
+    public static int[] howSum(int target, int[] numbers){
+        int[][] table = new int[target + 1][];
+        Arrays.fill(table,null);
+
+        table[0] = new int[0];
+
+        for (int i = 0; i < target; i++) {
+            if (table[i] != null) {
+                for (int num : numbers) {
+                    if (i + num <= target) {
+                        table[i + num] = Arrays.copyOf(table[i], table[i].length + 1);
+                        table[i + num][table[i + num].length - 1] = num;
+                    }
+                }
+            }
+        }
+        Arrays.stream(table).forEach(x -> System.out.println(Arrays.toString(x)));
+        return table[target];
+    }
+
+    public static int[] bestSum(int target, int[] numbers){
+        int[][] table = new int[target + 1][];
+        table[0] = new int[0];
+
+        for (int i = 0; i < target; i++) {
+            if (table[i] != null) {
+                int[] combination = Arrays.copyOf(table[i], table[i].length + 1);
+                for (int num : numbers) {
+                    if (table[i + num] == null || combination.length < table[num + 1].length) {
+                        combination[combination.length - 1] = num;
+                        table[i + num] = combination;
+                    }
+                }
+            }
+        }
+
+        Arrays.stream(table).forEach(x -> System.out.println(Arrays.toString(x)));
+
+        return null;
+    }
+
+    public static List<List<String>> allConstruct(String target, String[] wordbank) {
+        List<List<String>>[] table = new List[target.length() + 1];
+        table[0] = new ArrayList<>();
+        table[0].add(new ArrayList<>());
+
+        for (int i = 0; i <= target.length(); i++) {
+            if(table[i] != null) {
+                for (String word : wordbank){
+                    if (target.substring(i).startsWith(word) && (i + word.length()) <= target.length()) {
+                        if (table[i + word.length()] == null) {
+                            table[i + word.length()] = new ArrayList<>();
+                        }
+                        for (List<String> previousMatches : table[i]) {
+                            List<String> clone = new ArrayList<>(previousMatches);
+                            clone.add(word);
+                            table[i + word.length()].add(clone);
+                        }
+                    }
+
+                }
+            }
+        }
+
+//        System.out.println(Arrays.toString(table));
+        return table[target.length()];
     }
 }

@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        Tabulation.canSum(8, new int[]{3, 5});
+        System.out.println(Tabulation.allConstruct("river", new String[]{"iv", "r", "riv", "er", "e"}));
     }
 
 }
