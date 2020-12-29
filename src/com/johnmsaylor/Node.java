@@ -1,6 +1,8 @@
 package com.johnmsaylor;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 //unidirectional
 public class Node {
@@ -24,10 +26,36 @@ public class Node {
 
     public static void dfs(Node node){
         if (node.visited) return;
-        System.out.println(node.data + " ");
+        System.out.print(node.data + " ");
         node.visited = true;
         for (Node neighbor : node.getNeighbors()){
             dfs(neighbor);
+        }
+    }
+
+    public static void bfs(Node node) {
+        Deque<Node> deque = new ArrayDeque();
+        deque.add(node);
+        node.visited = true;
+        Node current;
+
+        while (!deque.isEmpty()) {
+            current = deque.pollFirst();
+            System.out.print(current.data + " ");
+            for (Node neighbor : current.getNeighbors()) {
+                if (!neighbor.visited) {
+                    neighbor.visited = true;
+                    deque.add(neighbor);
+                }
+            }
+        }
+    }
+
+    public static void reset(Node node) {
+        if (!node.visited) return;
+        node.visited = false;
+        for (Node neighbor : node.getNeighbors()) {
+            reset(neighbor);
         }
     }
 
@@ -53,6 +81,9 @@ public class Node {
         node50.addNeighbor(node70);
 
         dfs(node40);
+        reset(node40);
+        System.out.println();
+        bfs(node40);
     }
 
 }
