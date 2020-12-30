@@ -15,7 +15,10 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        Node.test();
+        System.out.println(LarryArray.larrysArray(new int[]{1,2,3,5,4}));
+        System.out.println(LarryArray.larrysArray(new int[]{1,3,4,2}));
+        System.out.println(LarryArray.larrysArray(new int[]{1,2,3,5,4}));
+        System.out.println(LarryArray.larrysArray(new int[]{4,1,3,2}));
     }
 
 }
