@@ -1,8 +1,5 @@
 package com.johnmsaylor.main;
-import com.johnmsaylor.Memoization;
-import com.johnmsaylor.NestedLogic;
-import com.johnmsaylor.Node;
-import com.johnmsaylor.Tabulation;
+import com.johnmsaylor.*;
 import com.johnmsaylor.medium.*;
 
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        GridSearch.test();
+        SubArrayDivision.test();
     }
 
 }
