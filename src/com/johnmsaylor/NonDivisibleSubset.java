@@ -15,6 +15,13 @@ public class NonDivisibleSubset {
     }
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
+        // Write your code here
+
+
+
+    }
+
+    public static int nonDivisibleSubsetFirst(int k, List<Integer> s) {
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < s.size() - 1; i++) {
             for (int j = i + 1; j < s.size(); j++) {
