@@ -17,7 +17,7 @@ public class NonDivisibleSubset {
     public static int nonDivisibleSubset(int k, List<Integer> s) {
         // Write your code here
 
-
+        return 0;
 
     }
 
