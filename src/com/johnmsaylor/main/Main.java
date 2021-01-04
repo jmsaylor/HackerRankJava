@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        CountLuck.test();
+        String result = MilitaryTimeConversion.timeConversion("12:05:45AM");
+        System.out.println(result);
     }
 
 }

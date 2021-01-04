@@ -32,10 +32,10 @@ public class CountLuck {
     public static List<int[]> dfs(int row, int col, char[][] matrix) {
         if (row < 0 || col < 0 || !(row < matrix.length) || !(col < matrix[0].length)) return null;
         if (matrix[row][col] == 'M' || matrix[row][col] == 'X') return null;
-        if (matrix[row][col] == '*') return hist;
+        if (matrix[row][col] == '*') return null;
         matrix[row][col] = 'M';
 
-        history.add(new int[]{row, col});
+//        history.add(new int[]{row, col});
 
         Arrays.stream(matrix).forEach(x -> System.out.println(Arrays.toString(x)));
         System.out.println("-------------------------------");
@@ -47,10 +47,10 @@ public class CountLuck {
         neighbors[3] = new int[]{row, col - 1};
 
         for (int[] neighbor : neighbors) {
-            dfs(neighbor[0], neighbor[1], matrix, history);
+            dfs(neighbor[0], neighbor[1], matrix);
         }
 
-        return history;
+        return null;
     }
 
 }
