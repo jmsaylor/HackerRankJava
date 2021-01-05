@@ -12,8 +12,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        String result = MilitaryTimeConversion.timeConversion("12:05:45AM");
-        System.out.println(result);
+        System.out.println(JulianCalendar.dayOfProgrammer(2000));
     }
 
 }
