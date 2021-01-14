@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(JulianCalendar.dayOfProgrammer(2000));
+        Encryption.test();
     }
 
 }
