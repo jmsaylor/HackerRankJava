@@ -1,8 +1,6 @@
 package com.johnmsaylor.medium;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class GroupsDFS {
 
@@ -18,7 +16,69 @@ public class GroupsDFS {
     {0, 1, 0, 0, 1, 1, 0, 1, 1},
     {1, 0, 1, 1, 1, 1, 0, 0, 0}};
 
-        System.out.println(connectedCell(grid2));
+        System.out.println(dfs(grid2));
+    }
+
+    public static int dfs(int[][] matrix) {
+//        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+//        Arrays.fill(visited, false);
+        for (var row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+        int group = 2;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] == 1) {
+                    dfsUtil(matrix, i, j, group);
+                    group++;
+
+                    //logging
+                    System.out.println("------------------------");
+                    for (var row : matrix) {
+                        System.out.println(Arrays.toString(row));
+                    }
+                }
+            }
+        }
+
+        //count group size
+        Map<Integer, Integer> counters = new HashMap<>();
+
+        for (var row : matrix) {
+            for (var cell : row) {
+                if (cell == 0) continue;
+                if (!counters.containsKey(cell)) {
+                    counters.put(cell, 1);
+                } else {
+                    counters.put(cell, counters.get(cell) + 1);
+                }
+            }
+        }
+
+        int result = 0;
+
+        for (Integer groupCount : counters.keySet()) {
+            result = Math.max(counters.get(groupCount), result);
+        }
+        System.out.println(counters);
+
+        return result;
+    }
+
+    public static void dfsUtil(int[][] matrix, int row, int column, int group) {
+        if (row < 0 || column < 0 || row >= matrix.length || column >= matrix[row].length) return;
+        if (matrix[row][column] == 0 || matrix[row][column] > 1) return;
+
+        matrix[row][column] = group;
+
+        dfsUtil(matrix, row - 1, column, group);
+        dfsUtil(matrix, row + 1, column, group);
+        dfsUtil(matrix, row, column + 1, group);
+        dfsUtil(matrix, row, column - 1, group);
+        dfsUtil(matrix, row - 1, column + 1, group);
+        dfsUtil(matrix, row + 1, column - 1, group);
+        dfsUtil(matrix, row + 1, column + 1, group);
+        dfsUtil(matrix, row - 1, column - 1, group);
     }
 
     static int connectedCell2(int[][] matrix) {
@@ -219,4 +279,6 @@ public class GroupsDFS {
         }
         return maxGroupCount;
     }
+
+
 }
