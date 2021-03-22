@@ -1,6 +1,7 @@
 package com.johnmsaylor.medium;
 
 import java.util.Arrays;
+import java.util.OptionalInt;
 
 public class Fairness {
 
@@ -14,32 +15,39 @@ public class Fairness {
         Arrays.sort(arr);
 
         System.out.println(Arrays.toString(arr));
-        //create table n - k
-
-        int[] table = new int[(arr.length - k) + 1];
 
         // calculate fairness of each window and log in table
+        OptionalInt scanMin = Arrays.stream(Arrays.copyOfRange(arr, 0, k)).min();
+        OptionalInt scanMax = Arrays.stream(Arrays.copyOfRange(arr, 0, k)).max();
 
-        for (int i = 0; i < table.length; i++) {
-            int max = 0;
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < k; j++) {
-                if(arr[i + j] > max) max = arr[i + j];
-                if(arr[i + j] < min) min = arr[i + j];
+        int min = scanMin.getAsInt();
+
+        int max = scanMax.getAsInt();
+
+        int fairness = max - min;
+
+        for (int i = 1; i <= arr.length - k; i++) {
+            if (arr[i - 1] == min) {
+                scanMin = Arrays.stream(Arrays.copyOfRange(arr, i, (i + k))).min();
+                min = scanMin.getAsInt();
+            } else if (arr[i - 1] == max) {
+                scanMax = Arrays.stream(Arrays.copyOfRange(arr, i, (i + k))).max();
+                max = scanMax.getAsInt();
             }
-            table[i] = max - min;
+
+            if (arr[(i + k) - 1] > max) {
+                max = arr[(i + k) - 1];
+            } else if (arr[(i + k) - 1] < min) {
+                min = arr[(i + k) - 1];
+            }
+
+            if ((max - min) < fairness) {
+                fairness = (max - min);
+            }
+
+
         }
 
-        System.out.println(Arrays.toString(table));
-        //return minimum value from table
-
-        int fairness = Integer.MAX_VALUE;
-
-        for (int calculation : table) {
-            if (calculation < fairness) {
-                fairness = calculation;
-            }
-        }
 
         return fairness;
     }
