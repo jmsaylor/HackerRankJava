@@ -10,20 +10,18 @@ public class ArrayManipulation {
     static long arrayManipulation(int n, int[][] queries) {
         long[] arr = new long[n];
         Arrays.fill(arr, 0);
-
-
-        for (int[] query : queries) {
-            for(int i = query[0] - 1; i <= query[1] - 1; i++) {
-                arr[i] = arr[i] + (long) query[2];
-            }
+        for (int [] query : queries){
+            arr[query[0] - 1] += query[2];
+            if (query[1] < n) arr[query[1]] -= query[2];
+            System.out.println(Arrays.toString(arr));
         }
-
         long result = 0;
+        long temp = 0;
 
         for (long num : arr) {
-            result = Math.max(result, num);
+            temp += num;
+            result = Math.max(result, temp);
         }
-
         return result;
     }
 }
