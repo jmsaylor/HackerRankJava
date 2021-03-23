@@ -13,7 +13,7 @@ public class ArrayManipulation {
         for (int [] query : queries){
             arr[query[0] - 1] += query[2];
             if (query[1] < n) arr[query[1]] -= query[2];
-            System.out.println(Arrays.toString(arr));
+//            System.out.println(Arrays.toString(arr));
         }
         long result = 0;
         long temp = 0;
