@@ -1,19 +1,17 @@
 package com.johnmsaylor.medium;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ValidString {
     public static void test() {
-//        System.out.println(isValid("abcdefghhgfedecba"));
-        System.out.println(isValid("ibfdgaeadiaefgbhbdghhhbgdfgeiccbiehhfcggchgghadhdhagfbahhddgghbdehidbibaeaagaeeigffcebfbaieggabcfbiiedcabfihchdfabifahcbhagccbdfifhghcadfiadeeaheeddddiecaicbgigccageicehfdhdgafaddhffadigfhhcaedcedecafeacbdacgfgfeeibgaiffdehigebhhehiaahfidibccdcdagifgaihacihadecgifihbebffebdfbchbgigeccahgihbcbcaggebaaafgfedbfgagfediddghdgbgehhhifhgcedechahidcbchebheihaadbbbiaiccededchdagfhccfdefigfibifabeiaccghcegfbcghaefifbachebaacbhbfgfddeceababbacgffbagidebeadfihaefefegbghgddbbgddeehgfbhafbccidebgehifafgbghafacgfdccgifdcbbbidfifhdaibgigebigaedeaaiadegfefbhacgddhchgcbgcaeaieiegiffchbgbebgbehbbfcebciiagacaiechdigbgbghefcahgbhfibhedaeeiffebdiabcifgccdefabccdghehfibfiifdaicfedagahhdcbhbicdgibgcedieihcichadgchgbdcdagaihebbabhibcihicadgadfcihdheefbhffiageddhgahaidfdhhdbgciiaciegchiiebfbcbhaeagccfhbfhaddagnfieihghfbaggiffbbfbecgaiiidccdceadbbdfgigibgcgchafccdchgifdeieicbaididhfcfdedbhaadedfageigfdehgcdaecaebebebfcieaecfagfdieaefdiedbcadchabhebgehiidfcgahcdhcdhgchhiiheffiifeegcfdgbdeffhgeghdfhbfbifgidcafbfcd"));
+        System.out.println(isValid("aabbccddeefghi"));
+//        System.out.println(isValid("ibfdgaeadiaefgbhbdghhhbgdfgeiccbiehhfcggchgghadhdhagfbahhddgghbdehidbibaeaagaeeigffcebfbaieggabcfbiiedcabfihchdfabifahcbhagccbdfifhghcadfiadeeaheeddddiecaicbgigccageicehfdhdgafaddhffadigfhhcaedcedecafeacbdacgfgfeeibgaiffdehigebhhehiaahfidibccdcdagifgaihacihadecgifihbebffebdfbchbgigeccahgihbcbcaggebaaafgfedbfgagfediddghdgbgehhhifhgcedechahidcbchebheihaadbbbiaiccededchdagfhccfdefigfibifabeiaccghcegfbcghaefifbachebaacbhbfgfddeceababbacgffbagidebeadfihaefefegbghgddbbgddeehgfbhafbccidebgehifafgbghafacgfdccgifdcbbbidfifhdaibgigebigaedeaaiadegfefbhacgddhchgcbgcaeaieiegiffchbgbebgbehbbfcebciiagacaiechdigbgbghefcahgbhfibhedaeeiffebdiabcifgccdefabccdghehfibfiifdaicfedagahhdcbhbicdgibgcedieihcichadgchgbdcdagaihebbabhibcihicadgadfcihdheefbhffiageddhgahaidfdhhdbgciiaciegchiiebfbcbhaeagccfhbfhaddagnfieihghfbaggiffbbfbecgaiiidccdceadbbdfgigibgcgchafccdchgifdeieicbaididhfcfdedbhaadedfageigfdehgcdaecaebebebfcieaecfagfdieaefdiedbcadchabhebgehiidfcgahcdhcdhgchhiiheffiifeegcfdgbdeffhgeghdfhbfbifgidcafbfcd"));
     }
 
     static String isValid(String s) {
         //count the characters in a hashmap
+
         HashMap<Character, Integer> set = new HashMap<>();
 
         for (Character c : s.toCharArray()) {
@@ -24,45 +22,42 @@ public class ValidString {
                 set.put(c, ++temp);
             }
         }
-        //determine total unique keys
-        System.out.println(set.size());
-        //all values in hashset should be s.length/unique
-        //if one is +1 return YES, of more NO
 
-
-        int count_limit = s.length() / set.size();
-
-        if (count_limit == 1) {
-            if((s.length() + 1) / set.size() == 2) {
-                count_limit = 2;
-            }
-        }
-
-        ArrayList<Integer> res = new ArrayList<>();
+        HashMap<Integer, Integer> counts = new HashMap<>();
 
         for (Character c : set.keySet()) {
-            if (set.get(c) != count_limit) {
-                res.add(set.get(c));
+            if (!counts.containsKey(set.get(c))) {
+                counts.put(set.get(c), 1);
+            } else {
+                int temp = counts.get(set.get(c));
+                temp++;
+                counts.put(set.get(c), temp);
             }
-            //break if res is greater than 1
         }
-        System.out.println(s.length() + " " + set.size());
-        System.out.println(set);
+
+        System.out.println(counts);
 
         boolean result = false;
 
-        if (res.size() == 0) {
-            result = true;
-        }
+        if (counts.size() == 1) result = true;
 
-        if (count_limit == 2 && res.size() == 1 && res.get(0) == 1) {
-            result = true;
-        }
+        if (counts.size() == 2 && counts.containsKey(1) && counts.get(1) == 1) result = true;
 
-        if (res.size() == 1 && res.get(0) - count_limit == 1) {
-            result = true;
-        }
+        if (counts.size() == 2 && counts.containsValue(1)) {
+            List<Integer> keys = new ArrayList<>();
+            keys.addAll(counts.keySet());
+            int min, max = 0;
+            if (keys.get(1) > keys.get(0)) {
+                min = keys.get(0);
+                max = keys.get(1);
+            } else {
+                min = keys.get(1);
+                max = keys.get(0);
+            }
 
+            if (max - min == 1 && counts.get(max) == 1) result = true;
+
+        }
 
         return result ? "YES" : "NO";
     }
