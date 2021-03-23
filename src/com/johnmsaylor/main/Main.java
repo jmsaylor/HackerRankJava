@@ -1,5 +1,6 @@
 package com.johnmsaylor.main;
 import com.johnmsaylor.*;
+import com.johnmsaylor.hard.ArrayManipulation;
 import com.johnmsaylor.medium.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        MinimumSwaps.test();
+        ArrayManipulation.test();
     }
 
 }
