@@ -20,12 +20,16 @@ public class PickingNumbers {
 
         int[] table = new int[a.size()];
 
+
+        // could find range of values to iterate through, but not much savings
         for (int i = 1; i < 99; i++) {
             if (!counts.containsKey(i)) continue;
+            // same here - could declare outside of loop to save on space, but not much reward
             int current = counts.get(i);
             int left = 0;
             int right = 0;
 
+            //TODO: no need to check both sides
             if (counts.containsKey(i - 1)) {
                 left = current + counts.get(i - 1);
             }
