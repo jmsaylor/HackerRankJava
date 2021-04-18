@@ -14,7 +14,7 @@ public class PickingNumbers {
             if (!counts.containsKey(num)){
                 counts.put(num, 1);
             } else {
-                counts.put(num, (counts.get(num) + 1);
+                counts.put(num, (counts.get(num) + 1));
             }
         }
 
