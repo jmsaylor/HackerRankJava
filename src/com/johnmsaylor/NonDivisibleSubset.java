@@ -1,23 +1,61 @@
 package com.johnmsaylor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class NonDivisibleSubset {
 
-    public static void test(){
-        int k = 3; //non-divisible by
-        List<Integer> s = new ArrayList<>();
-        s.add(1); s.add(7); s.add(2); s.add(4);
-        System.out.println(nonDivisibleSubset(k, s));
+    public static void main(String[] args){
+        List<Integer> input = new ArrayList<>();
+        for (int i = 1; i <= 10 ; i++) {
+            input.add(i);
+        }
+        System.out.println(nonDivisibleSubset(10, input));
     }
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
-        // Write your code here
+        System.out.println(s);
+        int[] table = new int[k];
+        Arrays.fill(table, 0);
 
-        return 0;
+        for (Integer n : s) {
+            table[n % k]++;
+        }
+
+        System.out.println(Arrays.toString(table));
+
+        int result = 0;
+
+        for (int i = 1; i <= table.length / 2; i++) {
+            result += Math.max(table[i], table[k - i]);
+        }
+
+        if (table[0] > 0) result += 1;
+
+        return result;
+    }
+
+    public static int nonDivisibleSubset4(int k, List<Integer> s) {
+        List<List<Boolean>> results = new ArrayList<>();
+
+        for (int i = 0; i < s.size(); i++) {
+            List<Boolean> current = new ArrayList<>();
+            for (int j = 0; j < s.size(); j++) {
+                current.add((s.get(i) + s.get(j)) % k != k);
+            }
+            results.add(current);
+        }
+
+        int maxLength = 0;
+
+        for (List<Boolean> result : results) {
+            int current = 0;
+            for (Boolean check : result) {
+                if (check) current++;
+            }
+            maxLength = Math.max(maxLength, current);
+        }
+
+        return maxLength;
 
     }
 
