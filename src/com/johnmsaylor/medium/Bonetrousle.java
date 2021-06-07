@@ -8,10 +8,134 @@ import java.util.List;
 public class Bonetrousle {
 
     public static void main(String[] args) {
-        System.out.println(bonetrousle(12, 8, 3));
+        System.out.println(bonetrousle(100,
+                100,
+                10));
     }
 
     public static List<Long> bonetrousle(long n, long k, int b) {
+        // If n is less than lowest or greater than highest summations, add -1 to List and return List
+
+        long lowestPossibleSummation = ((long) b * (b + 1)) / 2;
+
+        if (n < lowestPossibleSummation) {
+            return Arrays.asList(-1L);
+        }
+
+
+        // Initialize List of b length and set values to lowest possible
+
+        List<Long> result = new ArrayList<>(b);
+
+        long boxIndex = b;
+
+        // Initialize long totalSum = lowest summation
+        long totalSum = lowestPossibleSummation;
+
+        // Initialize long highestValue = k;
+        long highestValue = k;
+
+        //work from top
+        while (totalSum + (highestValue - boxIndex) <= n && boxIndex > 0) {
+            totalSum += (highestValue - boxIndex);
+            result.add(highestValue);
+            highestValue--;
+            boxIndex--;
+        }
+
+        if (boxIndex == 0 && totalSum < n) {
+            return Arrays.asList(-1L);
+        }
+
+        // add the difference
+        if (totalSum < n) {
+            result.add(Math.abs((totalSum - boxIndex) - n));
+        } else {
+            boxIndex++;
+        }
+
+        //work from bottom
+        for (long i = 1; i < boxIndex; i++) {
+            result.add(i);
+        }
+
+        System.out.println(totalSum + " " + n + " " + boxIndex);
+
+
+
+        // return List
+        return result;
+
+    }
+
+    public static List<Long> bonetrouslev2(long n, long k, int b) {
+        // If n is less than lowest or greater than highest summations, add -1 to List and return List
+        long lowestPossibleSummation = ((long) b * (b + 1)) / 2;
+//        long temp = k * b;
+//        long greatestPossibleSummation = temp - ((long) (b - 1) * b / 2);
+
+        long greatestPossibleSummation = 0L;
+
+        for (int i = 0; i < b; i ++) {
+            try {
+                greatestPossibleSummation = Math.addExact(greatestPossibleSummation, (k - i));
+            } catch (ArithmeticException e) {
+                return Arrays.asList(-1L);
+            }
+        }
+
+        if (n < lowestPossibleSummation || n > greatestPossibleSummation) {
+            return Arrays.asList(-1L);
+        }
+
+        if (b == 1) {
+            return Arrays.asList(n);
+        }
+
+        // Initialize List of b length and set values to lowest possible
+
+        List<Long> result = new ArrayList<>(b);
+
+        long boxIndex = b;
+
+
+
+        // Initialize long totalSum = lowest summation
+        long totalSum = lowestPossibleSummation;
+
+        // Initialize long highestValue = k;
+        long highestValue = k;
+
+        //work from top
+        while (totalSum + (highestValue - boxIndex) <= n && boxIndex > 0) {
+            totalSum += (highestValue - boxIndex);
+            result.add(highestValue);
+            highestValue--;
+            boxIndex--;
+        }
+
+        // add the difference
+        if (totalSum < n) {
+            result.add(Math.abs((totalSum - boxIndex) - n));
+        } else {
+            boxIndex++;
+        }
+
+        //work from bottom
+        for (long i = 1; i < boxIndex; i++) {
+            result.add(i);
+        }
+
+        System.out.println(totalSum + " " + n + " " + boxIndex);
+
+
+
+        // return List
+        return result;
+
+    }
+
+    public static List<Long> bonetrouslev1(long n, long k, int b) {
         // If n is less than lowest or greater than highest summations, add -1 to List and return List
         long lowestPossibleSummation = ((long) b * (b + 1)) / 2;
         long greatestPossibleSummation = k * b - (((long) (b - 1) * b) / 2);
