@@ -1,7 +1,6 @@
 package com.johnmsaylor.medium;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
 public class TreeLayersBFS {
 
@@ -23,6 +22,7 @@ public class TreeLayersBFS {
 
 
         levelOrder(head);
+        levelPrinter(Arrays.asList(head), "");
     }
 
     static void levelOrder(Node root){
@@ -42,6 +42,22 @@ public class TreeLayersBFS {
 
         System.out.println(result.substring(1));
 
+    }
+
+    static void levelPrinter(List<Node> nodes, String result) {
+        List<Node> nextLevel = new ArrayList<>();
+
+        for (Node node : nodes) {
+            result = result.concat(" " + node.value);
+            if (node.left != null) nextLevel.add(node.left);
+            if (node.right != null) nextLevel.add(node.right);
+        }
+
+       if (nextLevel.isEmpty()) {
+           System.out.println(result.substring(1));
+       } else {
+           levelPrinter(nextLevel, result);
+       }
     }
 
 }
