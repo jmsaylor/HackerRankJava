@@ -23,7 +23,7 @@ public class TreeHeight {
     }
 
     public static int treeHeight(Node node) {
-        return node == null ? 0 : Math.max(1 + treeHeight(node.left), 1 + treeHeight(node.right));
+        return node == null ? -1 : 1 + Math.max(treeHeight(node.left), treeHeight(node.right));
     }
 
     public static int treeHeightv1(Node node) {
